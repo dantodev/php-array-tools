@@ -12,7 +12,7 @@ A property holder for PHP.
 
 Install with [Composer](http://getcomposer.org):
 ```
-composer require dtkahl/php-collection
+composer require dtkahl/php-property-holder
 ```
 
 

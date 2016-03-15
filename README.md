@@ -1,2 +1,2 @@
-# php-property-holder
-Proplerty holder for PHP
+# PHP property holder
+A property holder for PHP.

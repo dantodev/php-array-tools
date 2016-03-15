@@ -54,4 +54,12 @@ class PropertyHolder
     return $this;
   }
 
+  /**
+   * @return array
+   */
+  public function all()
+  {
+    return $this->_properties;
+  }
+
 }

@@ -1,0 +1,10 @@
+{
+  "name": "dtkahl/php-property-holder",
+  "license": "MIT",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Dtkahl\\PropertyHolder\\": "src/"
+    }
+  }
+}

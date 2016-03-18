@@ -1,0 +1,12 @@
+language: php
+
+php:
+  - 7.0
+
+install: composer update
+
+notifications:
+  email:
+    recipients: kontakt@daniel-kahl.de
+    on_success: change
+    on_failure: change

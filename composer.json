@@ -2,7 +2,7 @@
   "name": "dtkahl/php-property-holder",
   "license": "MIT",
   "require": {
-    "php": ">=7.0.0"
+    "php": ">=5.6.0"
   },
   "require-dev": {
     "phpunit/phpunit": "5.2.*"

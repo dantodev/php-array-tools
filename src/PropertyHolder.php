@@ -13,43 +13,43 @@ class PropertyHolder
   }
 
   /**
-   * @param string $key
+   * @param $key
    * @return bool
    */
-  public function has(string $key)
+  public function has($key)
   {
-    return array_key_exists($key, $this->_properties);
+    return array_key_exists((string) $key, $this->_properties);
   }
 
   /**
-   * @param string $key
+   * @param $key
    * @param mixed $default
    * @return null
    */
-  public function get(string $key, $default = null)
+  public function get($key, $default = null)
   {
-    return $this->has($key) ? $this->_properties[$key] : $default;
+    return $this->has((string) $key) ? $this->_properties[(string) $key] : $default;
   }
 
   /**
-   * @param string $key
+   * @param $key
    * @param mixed $value
    * @return $this
    */
-  public function set(string $key, $value)
+  public function set($key, $value)
   {
-    $this->_properties[$key] = $value;
+    $this->_properties[(string) $key] = $value;
     return $this;
   }
 
   /**
-   * @param string $key
+   * @param $key
    * @return $this
    */
-  public function remove(string $key)
+  public function remove($key)
   {
-    if ($this->has($key)) {
-      unset($this->_properties[$key]);
+    if ($this->has((string) $key)) {
+      unset($this->_properties[(string) $key]);
     }
     return $this;
   }

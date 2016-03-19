@@ -8,7 +8,7 @@ A property holder for PHP.
 
 ## Dependencies
 
-* `PHP >= 7.0.0`
+* `PHP >= 5.6.0`
 
 
 ## Installation
@@ -45,16 +45,16 @@ class Example
 
 ## Methods
 
-#### `get(string $key, $default = null)`
+#### `get($key, $default = null)`
 Returns property value by given key or returns `$default` if property does not exist.
 
-#### `has(string $key)`
+#### `has($key)`
 Determine if an property with given key exists in the collection.
 
-#### `set(string $key, $value)`
+#### `set($key, $value)`
 Set property (override if existing). Returns collection instance.
 
-#### `remove(string $key)`
+#### `remove($key)`
 Remove property if existing. Returns collection instance.
 
 #### `all()`

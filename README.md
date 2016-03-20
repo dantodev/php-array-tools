@@ -1,5 +1,6 @@
 [![Latest Stable Version](https://poser.pugx.org/dtkahl/php-property-holder/v/stable)](https://packagist.org/packages/dtkahl/php-property-holder)
 [![License](https://poser.pugx.org/dtkahl/php-property-holder/license)](https://packagist.org/packages/dtkahl/php-property-holder)
+[![Build Status](https://travis-ci.org/dtkahl/php-property-holder.svg?branch=master)](https://travis-ci.org/dtkahl/php-property-holder)
 
 # PHP property holder
 

@@ -3,9 +3,12 @@
 class PropertyHolderTest extends \PHPUnit_Framework_TestCase
 {
 
+  /**
+   * @var PropertyHolder
+   */
   public $properties;
 
-  public function __construct()
+  public function setUp()
   {
     $this->properties = new PropertyHolder(['foo1' => 'bar1']);
   }

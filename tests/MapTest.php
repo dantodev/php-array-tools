@@ -1,10 +1,10 @@
 <?php namespace Dtkahl\ArrayTools;
 
-class PropertyHolderTest extends \PHPUnit_Framework_TestCase
+class MapTest extends \PHPUnit_Framework_TestCase
 {
 
   /**
-   * @var PropertyHolder
+   * @var Map
    */
   public $properties;
 

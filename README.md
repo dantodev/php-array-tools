@@ -1,6 +1,6 @@
-[![Latest Stable Version](https://poser.pugx.org/dtkahl/php-array-tools/v/stable)](https://packagist.org/packages/dtkahl/php-property-holder)
-[![License](https://poser.pugx.org/dtkahl/php-array-tools/license)](https://packagist.org/packages/dtkahl/php-property-holder)
-[![Build Status](https://travis-ci.org/dtkahl/php-array-tools.svg?branch=master)](https://travis-ci.org/dtkahl/php-property-holder)
+[![Latest Stable Version](https://poser.pugx.org/dtkahl/php-array-tools/v/stable)](https://packagist.org/packages/dtkahl/php-array-tools)
+[![License](https://poser.pugx.org/dtkahl/php-array-tools/license)](https://packagist.org/packages/dtkahl/php-array-tools)
+[![Build Status](https://travis-ci.org/dtkahl/php-array-tools.svg?branch=master)](https://travis-ci.org/dtkahl/php-array-tools)
 
 # PHP array tools
 

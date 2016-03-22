@@ -62,7 +62,7 @@ Remove property if existing. Returns collection instance.
 Returns all properties as array.
 
 
-## `Collection` Class
+## Collection Class
 
 This class provides a wrapper class for __indexed__ arrays.
 

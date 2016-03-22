@@ -1,10 +1,10 @@
-[![Latest Stable Version](https://poser.pugx.org/dtkahl/php-property-holder/v/stable)](https://packagist.org/packages/dtkahl/php-property-holder)
-[![License](https://poser.pugx.org/dtkahl/php-property-holder/license)](https://packagist.org/packages/dtkahl/php-property-holder)
-[![Build Status](https://travis-ci.org/dtkahl/php-property-holder.svg?branch=master)](https://travis-ci.org/dtkahl/php-property-holder)
+[![Latest Stable Version](https://poser.pugx.org/dtkahl/php-array-tools/v/stable)](https://packagist.org/packages/dtkahl/php-property-holder)
+[![License](https://poser.pugx.org/dtkahl/php-array-tools/license)](https://packagist.org/packages/dtkahl/php-property-holder)
+[![Build Status](https://travis-ci.org/dtkahl/php-array-tools.svg?branch=master)](https://travis-ci.org/dtkahl/php-property-holder)
 
-# PHP property holder
+# PHP array tools
 
-A map class for PHP.
+Different tools for arrays in PHP.
 
 
 ## Dependencies
@@ -16,47 +16,5 @@ A map class for PHP.
 
 Install with [Composer](http://getcomposer.org):
 ```
-composer require dtkahl/php-map
+composer require dtkahl/php-array-tools
 ```
-
-
-## Usage Example
-
-```php
-use Dtkahl\Map\Map;
-
-class Example
-{
-
-  public $properties;
-  
-  public function __construct()
-  {
-    $this->properties = new Map(['foo' => 'bar');
-  }
-  
-  public function foo()
-  {
-    return $this->properties->get('foo');
-  }
-
-}
-```
-
-
-## Methods
-
-#### `get($key, $default = null)`
-Returns property value by given key or returns `$default` if property does not exist.
-
-#### `has($key)`
-Determine if an property with given key exists in the collection.
-
-#### `set($key, $value)`
-Set property (override if existing). Returns collection instance.
-
-#### `remove($key)`
-Remove property if existing. Returns collection instance.
-
-#### `all()`
-Returns all properties as array.

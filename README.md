@@ -4,7 +4,7 @@
 
 # PHP property holder
 
-A property holder for PHP.
+A map class for PHP.
 
 
 ## Dependencies
@@ -16,14 +16,14 @@ A property holder for PHP.
 
 Install with [Composer](http://getcomposer.org):
 ```
-composer require dtkahl/php-property-holder
+composer require dtkahl/php-map
 ```
 
 
 ## Usage Example
 
 ```php
-use Dtkahl\PropertyHolder\PropertyHolder;
+use Dtkahl\Map\Map;
 
 class Example
 {
@@ -32,7 +32,7 @@ class Example
   
   public function __construct()
   {
-    $this->properties = new PropertyHolder(['foo' => 'bar');
+    $this->properties = new Map(['foo' => 'bar');
   }
   
   public function foo()

@@ -160,7 +160,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase {
   public function testSort()
   {
     $copy = $this->collection->copy()->sort(function ($a, $b) {
-      return $a['age'] >= $b['age'];
+      if (preg_match('#^7.#', phpversion())) {
+        return $a['age'] > $b['age'];
+      } else {
+        return $a['age'] >= $b['age'];
+      }
     });
     $this->assertEquals([$this->_1, $this->_3, $this->_2, $this->_0], $copy->toArray());
   }

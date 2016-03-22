@@ -7,19 +7,20 @@
 Different tools for arrays in PHP.
 
 
-### Dependencies
+#### Dependencies
 
 * `PHP >= 5.6.0`
 
 
-### Installation
+#### Installation
 
 Install with [Composer](http://getcomposer.org):
 ```
 composer require dtkahl/php-array-tools
 ```
 
-## `Map` Class
+
+## Map Class
 
 This class provides a wrapper class for __indexed__ arrays.
 
@@ -41,6 +42,9 @@ $collection = new Map([
     'age' =>  24
 );
 ```
+
+
+### Methods
 
 #### `get($key, $default = null)`
 Returns property value by given key or returns `$default` if property does not exist.

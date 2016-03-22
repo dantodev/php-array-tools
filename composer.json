@@ -1,5 +1,5 @@
 {
-  "name": "dtkahl/php-property-holder",
+  "name": "dtkahl/php-array-tools",
   "license": "MIT",
   "require": {
     "php": ">=5.6.0"
@@ -9,7 +9,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Dtkahl\\PropertyHolder\\": "src/"
+      "Dtkahl\\ArrayTools\\": "src/"
     }
   }
 }

@@ -1,4 +1,4 @@
-<?php namespace Dtkahl\PropertyHolder;
+<?php namespace Dtkahl\ArrayTools;
 
 class PropertyHolderTest extends \PHPUnit_Framework_TestCase
 {
@@ -10,7 +10,7 @@ class PropertyHolderTest extends \PHPUnit_Framework_TestCase
 
   public function setUp()
   {
-    $this->properties = new PropertyHolder(['foo1' => 'bar1']);
+    $this->properties = new Map(['foo1' => 'bar1']);
   }
 
   public function testConstructGet()

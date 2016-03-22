@@ -1,6 +1,6 @@
-<?php namespace Dtkahl\PropertyHolder;
+<?php namespace Dtkahl\ArrayTools;
 
-class PropertyHolder
+class Map
 {
   /**
    * @var array

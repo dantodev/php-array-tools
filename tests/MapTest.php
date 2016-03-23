@@ -48,7 +48,7 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
   public function testMerge()
   {
-    $this->properties->merge(['foo4', 'bar4']);
+    $this->properties->merge(['foo4' => 'bar4']);
     $this->assertEquals('bar4', $this->properties->get('foo4'));
   }
 

@@ -62,4 +62,36 @@ class Map
     return $this->_properties;
   }
 
+  /**
+   * @return array
+   */
+  public function getKeys()
+  {
+    return array_keys($this->_properties);
+  }
+
+  /**
+   * @param $data
+   * @return $this
+   */
+  public function merge($data)
+  {
+    if ($data instanceof self) {
+      $this->_properties = array_merge($this->_properties, $data->all());
+    } else {
+      $this->_properties = array_merge($this->_properties, $data);
+    }
+    return $this;
+  }
+
+  /**
+   * @return Map
+   */
+  public function copy()
+  {
+    return clone $this;
+  }
+
+  /* TODO toArray serialize */
+
 }

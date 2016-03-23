@@ -36,7 +36,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase {
     );
   }
 
-  public function testcopy()
+  public function testCopy()
   {
     $copy = $this->collection->copy();
     $copy->push('test');

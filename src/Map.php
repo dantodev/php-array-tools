@@ -131,4 +131,11 @@ class Map
     return clone $this;
   }
 
+  public function clear()
+  {
+    $this->_properties = [];
+    return $this;
+
+  }
+
 }

@@ -83,4 +83,9 @@ class MapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals(['foo1' => 'bar1'], $this->properties->only(['foo1'])->toArray());
   }
 
+  public function testClear()
+  {
+    $this->assertEquals([], $this->properties->clear()->toArray());
+  }
+
 }

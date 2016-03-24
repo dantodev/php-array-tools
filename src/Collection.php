@@ -30,10 +30,9 @@ class Collection
   public function toSerializedArray()
   {
     return $this->copy()->map(function ($item) {
-      if (is_object($item) && method_exists($item, 'toSerializedArray')) {
-        return $item->toSerializedArray();
-      }
-      return json_decode(json_encode($item), true); // Do anyone know a better way? :)
+      return (is_object($item) && method_exists($item, 'toSerializedArray')) ?
+          $item->toSerializedArray() :
+          json_decode(json_encode($item), true); // Do anyone know a better way? :)
     })->toArray();
   }
 

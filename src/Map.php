@@ -55,11 +55,50 @@ class Map
   }
 
   /**
+   * @param array $keys
+   * @return Map
+   */
+  public function except(array $keys)
+  {
+    return new self(array_diff_key($this->toArray(), array_flip($keys)));
+  }
+
+  /**
+   * @param array $keys
+   * @return Map
+   */
+  public function only(array $keys)
+  {
+    return new self(array_intersect_key($this->toArray(), array_flip($keys)));
+  }
+
+  /**
    * @return array
    */
-  public function all()
+  public function toArray()
   {
     return $this->_properties;
+  }
+
+  /**
+   * @return array
+   */
+  public function toSerializedArray()
+  {
+    $array = [];
+    foreach ($this->toArray() as $key=>$item) {
+      $array[$key] = (is_object($item) && method_exists($item, 'toSerializedArray')) ?
+          $item->toSerializedArray() : json_decode(json_encode($item), true);  // Do anyone know a better way? :)
+    }
+    return $array;
+  }
+
+  /**
+   * @return string
+   */
+  public function toJson()
+  {
+    return json_encode($this->toSerializedArray());
   }
 
   /**
@@ -77,7 +116,7 @@ class Map
   public function merge($data)
   {
     if ($data instanceof self) {
-      $this->_properties = array_merge($this->_properties, $data->all());
+      $this->_properties = array_merge($this->_properties, $data->toArray());
     } else {
       $this->_properties = array_merge($this->_properties, $data);
     }
@@ -90,48 +129,6 @@ class Map
   public function copy()
   {
     return clone $this;
-  }
-
-  /**
-   * @return array
-   */
-  public function toSerializedArray()
-  {
-    $array = [];
-    foreach ($this->_properties as $key=>$property) {
-      if (is_object($property) && method_exists($property, 'toSerializedArray')) {
-        $array[$key] = $property->toSerializedArray();
-      } else {
-        $array[$key] = json_decode(json_encode($property), true); // Do anyone know a better way? :)
-      }
-    }
-    return $array;
-  }
-
-  /**
-   * @return string
-   */
-  public function toJson()
-  {
-    return json_encode($this->toSerializedArray());
-  }
-
-  /**
-   * @param array $keys
-   * @return array
-   */
-  public function except(array $keys)
-  {
-    return array_diff_key($this->all(), array_flip($keys));
-  }
-
-  /**
-   * @param array $keys
-   * @return array
-   */
-  public function only(array $keys)
-  {
-    return array_intersect_key($this->all(), array_flip($keys));
   }
 
 }

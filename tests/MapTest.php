@@ -38,9 +38,9 @@ class MapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals(false, $this->properties->has('foo4'));
   }
 
-  public function testAll()
+  public function testToArray()
   {
-    $this->assertEquals(['foo1' => 'bar1', 'foo2' => 'bar2'], $this->properties->all());
+    $this->assertEquals(['foo1' => 'bar1', 'foo2' => 'bar2'], $this->properties->toArray());
   }
 
   public function testRemove()
@@ -75,12 +75,12 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
   public function testExcept()
   {
-    $this->assertEquals(['foo2' => 'bar2'], $this->properties->except(['foo1']));
+    $this->assertEquals(['foo2' => 'bar2'], $this->properties->except(['foo1'])->toArray());
   }
 
   public function testOnly()
   {
-    $this->assertEquals(['foo1' => 'bar1'], $this->properties->only(['foo1']));
+    $this->assertEquals(['foo1' => 'bar1'], $this->properties->only(['foo1'])->toArray());
   }
 
 }

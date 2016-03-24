@@ -37,13 +37,18 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
   public function testAll()
   {
-    $this->assertArrayHasKey('foo1', $this->properties->all(), true);
+    $this->assertEquals(['foo1' => 'bar1'], $this->properties->all());
   }
 
   public function testRemove()
   {
     $this->properties->remove('foo1');
     $this->assertEquals(null, $this->properties->get('foo1'));
+  }
+
+  public function testGetKeys()
+  {
+    $this->assertEquals(['foo1'], $this->properties->getKeys());
   }
 
   public function testMerge()

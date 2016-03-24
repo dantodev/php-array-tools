@@ -80,6 +80,9 @@ Returns map instance.
 #### `copy()`
 Returns clone of Map instance.
 
+#### `clear()`
+Removes all items map and returns instance of map.
+
 
 ## Collection Class
 

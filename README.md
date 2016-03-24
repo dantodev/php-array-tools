@@ -33,10 +33,10 @@ Refer namespace
 use Dtkahl\ArrayTools\Map;
 ```
 
-create new Collection
+create new Map
 
 ```php
-$collection = new Map([
+$map = new Map([
     'first_name' => 'Jeffrey',
     'last_name' => 'Clarence',
     'age' =>  24
@@ -50,16 +50,26 @@ $collection = new Map([
 Returns property value by given key or returns `$default` if property does not exist.
 
 #### `has($key)`
-Determine if an property with given key exists in the collection.
+Determine if an property with given key exists in the map.
 
 #### `set($key, $value)`
-Set property (override if existing). Returns collection instance.
+Set property (override if existing). Returns map instance.
 
 #### `remove($key)`
-Remove property if existing. Returns collection instance.
+Remove property if existing. Returns map instance.
 
-#### `all()`
-Returns all properties as array.
+#### `merge(array $data)`
+Merge given array (or Map instance) into map data.
+Returns map instance.
+
+#### `copy()`
+Returns clone of Map instance.
+
+#### `toSerializedArray()`
+Returns serialized Items (call `$item->toSerializedArray()` if item is object and has this method) as array.
+
+#### `toJson()`
+eturns all items of the map as JSON string.
 
 
 ## Collection Class
@@ -103,12 +113,12 @@ $collection = new Collection([
 Returns all items of the collection as indexed array.
 
 #### `toSerializedArray()`
-Returns serialized Items (call `$item->toSerializedArray()` if item is object and has this method)
+Returns serialized Items (call `$item->toSerializedArray()` if item is object and has this method) as array.
 
 #### `toJson()`
 Returns all items of the collection as JSON string.
 
-#### `clone()`
+#### `copy()`
 Returns clone of collection instance.
 
 #### `getKeys()`
@@ -189,7 +199,7 @@ Put an item in the collection by key. (move items one possition up where key >= 
 Returns collection instance.
 
 #### `merge(array $array)`
-Merge given array into collection data.
+Merge given array (or Collection instance) into collection data.
 Returns collection instance.
 
 #### `sort(\Closure $call)`

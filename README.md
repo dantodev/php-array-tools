@@ -58,24 +58,27 @@ Set property (override if existing). Returns map instance.
 #### `remove($key)`
 Remove property if existing. Returns map instance.
 
+#### `only()`
+returns Map with all items with given keys.
+
+#### `except()`
+returns Map with all items except with given keys.
+
+#### `toArray()`
+Returns all items as array.
+
+#### `toSerializedArray()`
+Returns serialized items (call `$item->toSerializedArray()` if item is object and has this method) as array.
+
+#### `toJson()`
+Returns all items of the map as JSON string.
+
 #### `merge(array $data)`
 Merge given array (or Map instance) into map data.
 Returns map instance.
 
 #### `copy()`
 Returns clone of Map instance.
-
-#### `toSerializedArray()`
-Returns serialized Items (call `$item->toSerializedArray()` if item is object and has this method) as array.
-
-#### `toJson()`
-Returns all items of the map as JSON string.
-
-#### `only()`
-returns all items with given keys as array.
-
-#### `except()`
-returns all items except with given keys as array.
 
 
 ## Collection Class

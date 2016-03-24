@@ -92,6 +92,28 @@ class Map
     return clone $this;
   }
 
-  /* TODO toArray serialize */
+  /**
+   * @return array
+   */
+  public function toSerializedArray()
+  {
+    $array = [];
+    foreach ($this->_properties as $key=>$property) {
+      if (is_object($property) && method_exists($property, 'toSerializedArray')) {
+        $array[$key] = $property->toSerializedArray();
+      } else {
+        $array[$key] = json_decode(json_encode($property), true); // Do anyone know a better way? :)
+      }
+    }
+    return $array;
+  }
+
+  /**
+   * @return string
+   */
+  public function toJson()
+  {
+    return json_encode($this->toSerializedArray());
+  }
 
 }

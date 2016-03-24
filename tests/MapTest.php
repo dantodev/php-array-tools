@@ -65,4 +65,9 @@ class MapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals(null, $this->properties->get('foo5'));
   }
 
+  public function testToJson()
+  {
+    $this->assertEquals('{"foo1":"bar1"}', $this->properties->toJson());
+  }
+
 }

@@ -69,7 +69,13 @@ Returns clone of Map instance.
 Returns serialized Items (call `$item->toSerializedArray()` if item is object and has this method) as array.
 
 #### `toJson()`
-eturns all items of the map as JSON string.
+Returns all items of the map as JSON string.
+
+#### `only()`
+returns all items with given keys as array.
+
+#### `except()`
+returns all items except with given keys as array.
 
 
 ## Collection Class

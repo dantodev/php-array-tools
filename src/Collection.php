@@ -244,6 +244,9 @@ class Collection
   public function unshift($value)
   {
     array_unshift($this->_data, $value);
+    if ($this->_pointer >= 0) {
+      $this->_pointer++;
+    }
     return $this;
   }
 
@@ -255,6 +258,9 @@ class Collection
   public function inject($key, $data)
   {
     array_splice($this->_data, (int) $key, 0, $data);
+    if ($key <= $this->_pointer) {
+      $this->_pointer++;
+    }
     return $this;
   }
 

@@ -10,7 +10,10 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
   public function setUp()
   {
-    $this->properties = new Map(['foo1' => 'bar1']);
+    $this->properties = new Map([
+        'foo1' => 'bar1',
+        'foo2' => 'bar2'
+    ]);
   }
 
   public function testConstructGet()
@@ -20,24 +23,24 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
   public function testSetGet()
   {
-    $this->properties->set('foo2', 'bar2');
-    $this->assertEquals('bar2', $this->properties->get('foo2'));
+    $this->properties->set('foo3', 'bar3');
+    $this->assertEquals('bar3', $this->properties->get('foo3'));
   }
 
   public function testGetDefault()
   {
-    $this->assertEquals('bar3', $this->properties->get('foo3', 'bar3'));
+    $this->assertEquals('bar4', $this->properties->get('foo4', 'bar4'));
   }
 
   public function testHas()
   {
     $this->assertEquals(true, $this->properties->has('foo1'));
-    $this->assertEquals(false, $this->properties->has('foo3'));
+    $this->assertEquals(false, $this->properties->has('foo4'));
   }
 
   public function testAll()
   {
-    $this->assertEquals(['foo1' => 'bar1'], $this->properties->all());
+    $this->assertEquals(['foo1' => 'bar1', 'foo2' => 'bar2'], $this->properties->all());
   }
 
   public function testRemove()
@@ -48,13 +51,13 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
   public function testGetKeys()
   {
-    $this->assertEquals(['foo1'], $this->properties->getKeys());
+    $this->assertEquals(['foo1', 'foo2'], $this->properties->getKeys());
   }
 
   public function testMerge()
   {
-    $this->properties->merge(['foo4' => 'bar4']);
-    $this->assertEquals('bar4', $this->properties->get('foo4'));
+    $this->properties->merge(['foo5' => 'bar5']);
+    $this->assertEquals('bar5', $this->properties->get('foo5'));
   }
 
   public function testCopy()
@@ -67,7 +70,17 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
   public function testToJson()
   {
-    $this->assertEquals('{"foo1":"bar1"}', $this->properties->toJson());
+    $this->assertEquals('{"foo1":"bar1","foo2":"bar2"}', $this->properties->toJson());
+  }
+
+  public function testExcept()
+  {
+    $this->assertEquals(['foo2' => 'bar2'], $this->properties->except(['foo1']));
+  }
+
+  public function testOnly()
+  {
+    $this->assertEquals(['foo1' => 'bar1'], $this->properties->only(['foo1']));
   }
 
 }

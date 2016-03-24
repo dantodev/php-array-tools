@@ -116,4 +116,22 @@ class Map
     return json_encode($this->toSerializedArray());
   }
 
+  /**
+   * @param array $keys
+   * @return array
+   */
+  public function except(array $keys)
+  {
+    return array_diff_key($this->all(), array_flip($keys));
+  }
+
+  /**
+   * @param array $keys
+   * @return array
+   */
+  public function only(array $keys)
+  {
+    return array_intersect_key($this->all(), array_flip($keys));
+  }
+
 }

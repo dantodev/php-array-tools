@@ -76,7 +76,6 @@ class Map
    */
   public function merge($data)
   {
-    var_dump($data);
     if ($data instanceof self) {
       $this->_properties = array_merge($this->_properties, $data->all());
     } else {

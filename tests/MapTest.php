@@ -103,4 +103,13 @@ class MapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals(['foo6' => null], $map->clear()->toArray());
   }
 
+  public function testCountIsEmpty()
+  {
+    $this->assertEquals(2, $this->properties->count());
+    $this->assertFalse($this->properties->isEmpty());
+    $this->properties->clear();
+    $this->assertEquals(0, $this->properties->count());
+    $this->assertTrue($this->properties->isEmpty());
+  }
+
 }

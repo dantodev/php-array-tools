@@ -146,6 +146,9 @@ class Map
     return clone $this;
   }
 
+  /**
+   * @return $this
+   */
   public function clear()
   {
     if ($this->_keys_locked) {
@@ -154,7 +157,22 @@ class Map
       $this->_properties = [];
     }
     return $this;
+  }
 
+  /**
+   * @return int
+   */
+  public function count()
+  {
+    return count($this->_properties);
+  }
+
+  /**
+   * @return bool
+   */
+  public function isEmpty()
+  {
+  return $this->count() === 0;
   }
 
 }

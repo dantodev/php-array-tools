@@ -5,7 +5,7 @@ class Map
   /**
    * @var array
    */
-  private $_properties = [];
+  private $_properties  = [];
   private $_keys_locked = false;
 
   /**
@@ -148,7 +148,11 @@ class Map
 
   public function clear()
   {
-    $this->_properties = [];
+    if ($this->_keys_locked) {
+      $this->_properties = array_map(function () {return null;}, $this->_properties);
+    } else {
+      $this->_properties = [];
+    }
     return $this;
 
   }

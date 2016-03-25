@@ -98,6 +98,9 @@ class MapTest extends \PHPUnit_Framework_TestCase
       $success = true;
     }
     $this->assertTrue($success);
+    $this->assertTrue($map->remove('foo6')->has('foo6'));
+    $this->assertEquals('bar6', $map->set('foo6', 'bar6')->get('foo6'));
+    $this->assertEquals(['foo6' => null], $map->clear()->toArray());
   }
 
 }

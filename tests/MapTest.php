@@ -88,4 +88,16 @@ class MapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals([], $this->properties->clear()->toArray());
   }
 
+  public function testKeysLocked()
+  {
+    $map = new Map(['foo6' => 'bar6'], true);
+    $success = false;
+    try {
+      $map->set('foo7', 'bar7');
+    } catch (\RuntimeException $e) {
+      $success = true;
+    }
+    $this->assertTrue($success);
+  }
+
 }

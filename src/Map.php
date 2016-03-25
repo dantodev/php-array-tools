@@ -6,10 +6,17 @@ class Map
    * @var array
    */
   private $_properties = [];
+  private $_keys_locked = false;
 
-  public function __construct(array $properties = [])
+  /**
+   * Map constructor.
+   * @param array $properties
+   * @param bool $keys_locked
+   */
+  public function __construct(array $properties = [], $keys_locked = false)
   {
     $this->_properties = $properties;
+    $this->_keys_locked = $keys_locked;
   }
 
   /**
@@ -38,7 +45,11 @@ class Map
    */
   public function set($key, $value)
   {
-    $this->_properties[(string) $key] = $value;
+    if (!$this->_keys_locked || $this->has($key)) {
+      $this->_properties[(string) $key] = $value;
+    } else {
+      throw new \RuntimeException("Unknown map key '$key'.'");
+    }
     return $this;
   }
 
@@ -49,7 +60,11 @@ class Map
   public function remove($key)
   {
     if ($this->has((string) $key)) {
-      unset($this->_properties[(string) $key]);
+      if ($this->_keys_locked) {
+        $this->set($key, null);
+      } else {
+        unset($this->_properties[(string) $key]);
+      }
     }
     return $this;
   }

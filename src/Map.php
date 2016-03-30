@@ -9,6 +9,41 @@ class Map
   private $_keys_locked = false;
 
   /**
+   * @param $key
+   * @return mixed
+   */
+  public function __get($key)
+  {
+    return $this->get($key);
+  }
+
+  /**
+   * @param $key
+   * @param $value
+   */
+  public function __set($key, $value)
+  {
+    $this->set($key, $value);
+  }
+
+  /**
+   * @param $key
+   * @return bool
+   */
+  public function __isset($key)
+  {
+    return $this->has($key);
+  }
+
+  /**
+   * @param $key
+   */
+  public function __unset($key)
+  {
+    $this->remove($key);
+  }
+
+  /**
    * Map constructor.
    * @param array $properties
    * @param bool $keys_locked

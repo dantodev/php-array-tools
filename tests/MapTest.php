@@ -16,6 +16,15 @@ class MapTest extends \PHPUnit_Framework_TestCase
     ]);
   }
 
+  public function testMagic()
+  {
+    $this->assertTrue(isset($this->properties->foo1));
+    $this->assertFalse(isset($this->properties->foo3));
+    $this->properties->foo3 = "bar3";
+    $this->assertEquals("bar3", $this->properties->foo3);
+    $this->assertTrue(isset($this->properties->foo3));
+  }
+
   public function testConstructGet()
   {
     $this->assertEquals('bar1', $this->properties->get('foo1'));

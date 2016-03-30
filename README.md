@@ -83,6 +83,18 @@ Returns clone of Map instance.
 #### `clear()`
 Removes all items map and returns instance of map.
 
+#### `each(\Closure $call)`
+Walk through map items.
+
+```php
+$map->each(function ($key, $item) {
+  // do something
+});
+```
+
+You can break by `return false` in the closure.
+Returns map instance.
+
 
 ## Collection Class
 
@@ -268,3 +280,6 @@ returns an array with given array entries/public properties of collection items.
 ```php
 $collection->lists(['age']) // array (array('age'=>24'), array('age'=>32), array('age'=>19))
 ```
+
+#### `join(string $glue)`
+Join collection items with a given $glue.

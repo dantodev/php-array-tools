@@ -112,4 +112,18 @@ class MapTest extends \PHPUnit_Framework_TestCase
     $this->assertTrue($this->properties->isEmpty());
   }
 
+
+  public function testEach()
+  {
+    $arr = [];
+    $this->properties->each(function ($key, $item) use (&$arr)
+    {
+      $arr[$key] = $item;
+    });
+    $this->assertEquals([
+        'foo1' => 'bar1',
+        'foo2' => 'bar2'
+    ], $arr);
+  }
+
 }

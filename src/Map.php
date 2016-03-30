@@ -175,4 +175,18 @@ class Map
   return $this->count() === 0;
   }
 
+  /**
+   * @param \Closure $call
+   * @return $this
+   */
+  public function each(\Closure $call)
+  {
+    foreach ($this->_properties as $key=>$item) {
+      if ($call($key, $item) === false) {
+        break;
+      }
+    }
+    return $this;
+  }
+
 }

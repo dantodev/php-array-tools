@@ -78,12 +78,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase {
 
   public function testEach()
   {
-    $this->collection->each(function ($item)
+    $arr = [];
+    $this->collection->each(function ($item, $key) use (&$arr)
     {
-      $this->assertArrayHasKey('first_name', $item);
-      $this->assertArrayHasKey('last_name', $item);
-      $this->assertArrayHasKey('age', $item);
+      $arr[$key] = $item;
     });
+    $this->assertEquals([$this->_0, $this->_1, $this->_2, $this->_3], $arr);
   }
 
   public function testFilter()

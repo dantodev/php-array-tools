@@ -379,4 +379,13 @@ class Collection
     })->toArray();
   }
 
+  /**
+   * @param string $glue
+   * @return string
+   */
+  public function join($glue)
+  {
+    return implode($glue, $this->_data);
+  }
+
 }

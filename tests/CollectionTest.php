@@ -209,4 +209,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals([['first_name' => 'john', 'last_name' => 'smith'], ['first_name' => 'kara', 'last_name' => 'trace'], ['first_name' => 'phil', 'last_name' => 'mcKay'], ['first_name' => 'rose', 'last_name' => 'smith']], $list);
   }
 
+  public function testJoin()
+  {
+    $this->assertEquals("a,b,c", (new Collection(["a", "b", "c"]))->join(","));
+  }
+
 }

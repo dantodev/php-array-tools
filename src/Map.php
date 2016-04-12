@@ -64,6 +64,15 @@ class Map
   }
 
   /**
+   * @param array $keys
+   * @return bool
+   */
+  public function hasKeys(array $keys)
+  {
+    return count(array_diff($keys, $this->getKeys())) === 0;
+  }
+
+  /**
    * @param $key
    * @param mixed $default
    * @return null

@@ -43,8 +43,14 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
   public function testHas()
   {
-    $this->assertEquals(true, $this->properties->has('foo1'));
-    $this->assertEquals(false, $this->properties->has('foo4'));
+    $this->assertTrue($this->properties->has('foo1'));
+    $this->assertFalse($this->properties->has('foo4'));
+  }
+
+  public function testHasKeys()
+  {
+    $this->assertTrue($this->properties->hasKeys(['foo1', 'foo2']));
+    $this->assertFalse($this->properties->hasKeys(['foo1', 'foo4']));
   }
 
   public function testToArray()
@@ -55,7 +61,7 @@ class MapTest extends \PHPUnit_Framework_TestCase
   public function testRemove()
   {
     $this->properties->remove('foo1');
-    $this->assertEquals(null, $this->properties->get('foo1'));
+    $this->assertNull($this->properties->get('foo1'));
   }
 
   public function testGetKeys()

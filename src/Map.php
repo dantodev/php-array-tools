@@ -47,11 +47,22 @@ class Map
    * Map constructor.
    * @param array $properties
    * @param bool $keys_locked
+   * @param bool $construct_recursive
    */
-  public function __construct(array $properties = [], $keys_locked = false)
+  public function __construct(array $properties = [], $keys_locked = false, $construct_recursive = false)
   {
-    $this->_properties = $properties;
     $this->_keys_locked = $keys_locked;
+    if ($construct_recursive) {
+      foreach ($properties as $key=>$value) {
+        if (is_array($value)) {
+          $value = new self($value, false, true);
+        }
+        $properties[$key] = $value;
+      }
+    } else {
+
+      $this->_properties = $properties;
+    }
   }
 
   /**

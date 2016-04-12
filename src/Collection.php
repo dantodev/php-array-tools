@@ -9,10 +9,24 @@ class Collection
   /**
    * Collection constructor.
    * @param array $data
+   * @param bool $construct_recursive
    */
-  public function __construct(array $data = [])
+  public function __construct(array $data = [], $construct_recursive = false)
   {
-    $this->_data = $data;
+    if ($construct_recursive) {
+      foreach ($data as $index=>$value) {
+        if (is_array($value)) {
+          if (array_keys($value) === range(0, count($value) - 1)) {
+            $value = new self($value, false, true);
+          } else {
+            $value = new Map($value, false, true);
+          }
+        }
+        $this->_data[$index] = $value;
+      }
+    } else {
+      $this->_data = $data;
+    }
     $this->_clearIndexes();
   }
 

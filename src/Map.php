@@ -55,7 +55,11 @@ class Map
     if ($construct_recursive) {
       foreach ($properties as $key=>$value) {
         if (is_array($value)) {
-          $value = new self($value, false, true);
+          if (array_keys($value) === range(0, count($value) - 1)) {
+            $value = new Collection($value, false, true);
+          } else {
+            $value = new self($value, false, true);
+          }
         }
         $this->_properties[$key] = $value;
       }

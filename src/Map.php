@@ -146,14 +146,7 @@ class Map
    */
   public function toArray()
   {
-    $array = [];
-    $this->each(function ($key, $value) use (&$array) {
-      if (is_object($value) && method_exists($value, "toArray")) {
-        $value = $value->toArray();
-      }
-      $array[$key] = $value;
-    });
-    return $array;
+    return $this->_properties;
   }
 
   /**
@@ -233,7 +226,7 @@ class Map
    */
   public function isEmpty()
   {
-    return $this->count() === 0;
+  return $this->count() === 0;
   }
 
   /**

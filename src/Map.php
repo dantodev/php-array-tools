@@ -57,10 +57,9 @@ class Map
         if (is_array($value)) {
           $value = new self($value, false, true);
         }
-        $properties[$key] = $value;
+        $this->_properties[$key] = $value;
       }
     } else {
-
       $this->_properties = $properties;
     }
   }

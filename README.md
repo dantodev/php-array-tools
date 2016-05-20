@@ -40,7 +40,7 @@ $map = new Map([
     'first_name' => 'Jeffrey',
     'last_name' => 'Clarence',
     'age' =>  24
-);
+]);
 ```
 
 

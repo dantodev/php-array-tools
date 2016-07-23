@@ -179,11 +179,10 @@ class Collection
      */
     public function filter(\Closure $call)
     {
-        $instance = $this;
-        $this->each(function ($item, $key) use ($call, $instance) {
+        $this->each(function ($item, $key) use ($call) {
             $exit = $call($item, $key);
             if ($exit !== true) {
-                $instance->remove($key, true);
+                $this->remove($key, true);
             }
         });
         return $this->_clearIndexes();
@@ -222,7 +221,7 @@ class Collection
         return array_pop($this->_data);
     }
 
-    /**
+    /**$instance
      * @param mixed $value
      * @return $this
      */
@@ -309,9 +308,8 @@ class Collection
      */
     public function map(\Closure $call)
     {
-        $instance = $this;
-        return $this->each(function ($item, $key) use ($call, $instance) {
-            $instance->put($key, $call($item, $key));
+        return $this->each(function ($item, $key) use ($call) {
+            $this->put($key, $call($item, $key));
         });
     }
 

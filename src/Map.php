@@ -249,4 +249,15 @@ class Map
         return $this;
     }
 
+    /**
+     * @param \Closure $call
+     * @return Map
+     */
+    public function map(\Closure $call)
+    {
+        return $this->each(function ($key, $item) use ($call) {
+            $this->set($key, $call($key, $item));
+        });
+    }
+
 }

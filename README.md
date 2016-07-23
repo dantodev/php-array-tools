@@ -87,13 +87,24 @@ Removes all items map and returns instance of map.
 Walk through map items.
 
 ```php
-$map->each(function ($key, $item) {
+$map->each(function ($key, $value) {
   // do something
 });
 ```
 
 You can break by `return false` in the closure.
 Returns map instance.
+
+#### `map(\Closure $call)`
+Walk through map items and overrides there values by the return value of the given closure.
+
+```php
+$map->map(function ($key, $value) {
+  return "Mapped " . $value;
+});
+```
+
+Returns collection instance.
 
 
 ## Collection Class
@@ -238,7 +249,7 @@ $collection->sort(function ($a, $b) {
 Returns collection instance.
 
 #### `map(\Closure $call)`
-Walk through collection items and overrides them by the return value oft the given closure.
+Walk through collection items and overrides them by the return value of the given closure.
 
 ```php
 $collection->map(function ($item) {

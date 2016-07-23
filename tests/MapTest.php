@@ -140,4 +140,16 @@ class MapTest extends \PHPUnit_Framework_TestCase
         ], $arr);
     }
 
+
+    public function testMap()
+    {
+        $this->properties->map(function ($key, $item) {
+            return "mapped_".$item;
+        });
+        $this->assertEquals([
+            'foo1' => 'mapped_bar1',
+            'foo2' => 'mapped_bar2'
+        ], $this->properties->toArray());
+    }
+
 }

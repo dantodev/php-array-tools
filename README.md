@@ -249,14 +249,14 @@ $collection->map(function ($item) {
 Returns collection instance.
 
 #### `slice(int $offset, int|null $length = null)`
-slize the collection data with [array_slice](http://php.net/manual/en/function.array-slice.php).
+Slize the collection data with [array_slice](http://php.net/manual/en/function.array-slice.php).
 Returns collection instance.
 
 #### `chunk(int $size)`
 Returns an array of collections with given chunk size.
 
 #### `current(int $size)`
-returns item on current pointer position or 'null' if there is no item.
+Returns item on current pointer position or 'null' if there is no item.
 
 #### `next(int $size)`
 Increase internal pointer by one and returns the item or 'null' if there is no item on this position.
@@ -283,3 +283,7 @@ $collection->lists(['age']) // array (array('age'=>24'), array('age'=>32), array
 
 #### `join(string $glue)`
 Join collection items with a given $glue.
+
+#### `unique()`
+Remove duplicated entries.
+Returns collection instance.

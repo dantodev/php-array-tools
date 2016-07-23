@@ -402,4 +402,13 @@ class Collection
         return implode($glue, $this->_data);
     }
 
+    /**
+     * @return $this
+     */
+    public function unique()
+    {
+        $this->_data = array_unique($this->_data, SORT_REGULAR);
+        return $this->_clearIndexes();
+    }
+
 }

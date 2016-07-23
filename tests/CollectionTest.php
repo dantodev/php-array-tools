@@ -214,4 +214,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("a,b,c", (new Collection(["a", "b", "c"]))->join(","));
     }
 
+    public function testUnique()
+    {
+        $this->assertEquals(["a", "c"], (new Collection(["a", "c", "a"]))->unique()->toArray());
+    }
+
 }

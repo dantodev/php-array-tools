@@ -192,12 +192,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_1, $this->collection->next());
         $this->assertEquals($this->_2, $this->collection->next());
         $this->assertEquals($this->_3, $this->collection->next());
-        $this->assertEquals(null, $this->collection->next());
+        $this->assertFalse($this->collection->next());
         $this->assertEquals($this->_3, $this->collection->previous());
         $this->assertEquals($this->_2, $this->collection->previous());
         $this->assertEquals($this->_1, $this->collection->previous());
         $this->assertEquals($this->_0, $this->collection->previous());
-        $this->assertEquals(null, $this->collection->previous());
+        $this->assertFalse($this->collection->previous());
         $this->collection->setPointer(2);
         $this->assertEquals($this->_2, $this->collection->current());
 

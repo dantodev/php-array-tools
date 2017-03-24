@@ -136,11 +136,12 @@ class Collection
 
     /**
      * @param int $key
+     * @param mixed|null $default
      * @return mixed
      */
-    public function get($key)
+    public function get($key, $default = null)
     {
-        return $this->hasKey((int)$key) ? $this->_data[(int)$key] : null;
+        return $this->hasKey((int)$key) ? $this->_data[(int)$key] : $default;
     }
 
     /**
@@ -247,7 +248,11 @@ class Collection
      */
     public function shift()
     {
-        return array_shift($this->_data);
+        $return = array_shift($this->_data);
+        if ($this->_pointer > 0) {
+            $this->_pointer--;
+        }
+        return $return;
     }
 
     /**
@@ -340,7 +345,7 @@ class Collection
      */
     public function current()
     {
-        return $this->get($this->_pointer);
+        return $this->get($this->_pointer, false);
     }
 
     /**

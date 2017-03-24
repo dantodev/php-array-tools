@@ -280,4 +280,13 @@ class Map
         });
     }
 
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getType($key)
+    {
+        return gettype($this->get($key));
+    }
+
 }

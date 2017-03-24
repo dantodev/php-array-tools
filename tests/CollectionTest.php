@@ -219,4 +219,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(["a", "c"], (new Collection(["a", "c", "a"]))->unique()->toArray());
     }
 
+    public function testGetType()
+    {
+        $this->assertEquals('array', $this->collection->getType('1'));
+    }
+
 }

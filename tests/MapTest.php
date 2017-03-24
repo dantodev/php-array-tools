@@ -162,4 +162,9 @@ class MapTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($map->get('other') instanceof Map);
     }
 
+    public function testGetType()
+    {
+        $this->assertEquals('string', $this->properties->getType('foo1'));
+    }
+
 }

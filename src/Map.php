@@ -1,6 +1,6 @@
 <?php namespace Dtkahl\ArrayTools;
 
-class Map implements \ArrayAccess, \Countable
+class Map implements \ArrayAccess, \Countable, \Serializable
 {
     /**
      * @var array
@@ -320,6 +320,19 @@ class Map implements \ArrayAccess, \Countable
      */
     public function offsetGet($offset) {
         return $this->get($offset);
+    }
+
+    public function serialize()
+    {
+        return serialize($this->_properties);
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        $this->_properties = unserialize($serialized);
     }
 
 }

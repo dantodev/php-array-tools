@@ -13,6 +13,7 @@ class MapTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->properties instanceof Map);
         $this->assertTrue($this->properties instanceof \Countable);
         $this->assertTrue($this->properties instanceof \ArrayAccess);
+        $this->assertTrue($this->properties instanceof \Serializable);
     }
 
     public function testArrayAccess()
@@ -22,7 +23,14 @@ class MapTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($this->properties['foo3']));
         unset($this->properties['foo1']);
         $this->assertFalse(isset($this->properties['foo1']));
+    }
 
+    public function testSerializable()
+    {
+        $serialized = serialize($this->properties);
+        $map = unserialize($serialized);
+        $this->assertTrue($map instanceof Map);
+        $this->assertEquals('bar2', $map['foo2']);
     }
 
     public function setUp()

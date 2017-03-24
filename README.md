@@ -22,7 +22,7 @@ composer require dtkahl/php-array-tools
 
 ## Map Class
 
-This class provides a wrapper class for __indexed__ arrays and implements `\ArrayAccess` and `\Countable` Interfaces.
+This class provides a wrapper class for __indexed__ arrays and implements `\ArrayAccess`, `\Countable` and `\Serializable` Interfaces.
 
 
 ### Usage
@@ -113,7 +113,7 @@ Returns collection instance.
 
 ## Collection Class
 
-This class provides a wrapper class for __indexed__ arrays implements `\ArrayAccess`, `\Countable` and `\Iterator` Interfaces.
+This class provides a wrapper class for __indexed__ arrays implements `\ArrayAccess`, `\Countable`, `\Iterator` and `\Serializable` Interfaces.
 
 **available options:**
 

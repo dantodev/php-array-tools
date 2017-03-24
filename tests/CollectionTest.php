@@ -24,6 +24,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->collection instanceof Collection);
         $this->assertTrue($this->collection instanceof \Countable);
         $this->assertTrue($this->collection instanceof \ArrayAccess);
+        $this->assertTrue($this->collection instanceof \Serializable);
     }
 
     public function testIterator()
@@ -41,6 +42,14 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($this->collection[4]));
         unset($this->collection[2]);
         $this->assertFalse(isset($this->collection[4]));
+    }
+
+    public function testSerializable()
+    {
+        $serialized = serialize($this->collection);
+        $collection = unserialize($serialized);
+        $this->assertTrue($collection instanceof Collection);
+        $this->assertEquals('kara', $collection[1]['first_name']);
     }
 
     public function testToArray()

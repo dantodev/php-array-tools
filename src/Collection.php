@@ -1,6 +1,6 @@
 <?php namespace Dtkahl\ArrayTools;
 
-class Collection implements \ArrayAccess, \Countable, \Iterator
+class Collection implements \ArrayAccess, \Countable, \Iterator, \Serializable
 {
 
     private $_data = [];
@@ -494,6 +494,19 @@ class Collection implements \ArrayAccess, \Countable, \Iterator
      */
     public function offsetGet($offset) {
         return $this->get($offset);
+    }
+
+    public function serialize()
+    {
+        return serialize($this->_data);
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        $this->_data = unserialize($serialized);
     }
 
 }

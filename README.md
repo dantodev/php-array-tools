@@ -43,6 +43,10 @@ $map = new Map([
 ]);
 ```
 
+**available options:**
+
+* `recursive` -> create instance recursive (automatically create Map or Collection instance from array values)
+* `key_locked` -> only allow keys which are already defined in Map.
 
 ### Methods
 
@@ -110,6 +114,10 @@ Returns collection instance.
 ## Collection Class
 
 This class provides a wrapper class for __indexed__ arrays implements `\ArrayAccess`, `\Countable` and `\Iterator` Interfaces.
+
+**available options:**
+
+* `recursive` -> create instance recursive (automatically create Map or Collection instance from array values)
 
 
 ### Usage

@@ -109,7 +109,7 @@ Returns collection instance.
 
 ## Collection Class
 
-This class provides a wrapper class for __indexed__ arrays implements `\ArrayAccess` and `\Countable` Interfaces.
+This class provides a wrapper class for __indexed__ arrays implements `\ArrayAccess`, `\Countable` and `\Iterator` Interfaces.
 
 
 ### Usage

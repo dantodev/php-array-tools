@@ -152,4 +152,14 @@ class MapTest extends \PHPUnit_Framework_TestCase
         ], $this->properties->toArray());
     }
 
+    public function testRecursiveOption()
+    {
+        $map = new Map([
+            'persons' => ['Luke', 'Lea'],
+            'other' => ['foo' => 'bar', 'foo2' => 'bar2']
+        ], ['recursive' => true]);
+        $this->assertTrue($map->get('persons') instanceof Collection);
+        $this->assertTrue($map->get('other') instanceof Map);
+    }
+
 }

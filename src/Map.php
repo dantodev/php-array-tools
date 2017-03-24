@@ -51,7 +51,7 @@ class Map
     public function __construct(array $properties = [], array $options = [])
     {
         $this->_options = $options;
-        if ($this->getOption('construct_recursive', false)) {
+        if ($this->getOption('recursive', false)) {
             foreach ($properties as $key => $value) {
                 if (is_array($value)) {
                     if (array_keys($value) === range(0, count($value) - 1)) {

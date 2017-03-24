@@ -15,7 +15,7 @@ class Collection
     public function __construct(array $data = [], array $options = [])
     {
         $this->_options = $options;
-        if ($this->getOption('construct_recursive', false)) {
+        if ($this->getOption('recursive', false)) {
             foreach ($data as $index => $value) {
                 if (is_array($value)) {
                     if (array_keys($value) === range(0, count($value) - 1)) {

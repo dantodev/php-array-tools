@@ -1,6 +1,6 @@
 <?php namespace Dtkahl\ArrayTools;
 
-class Collection implements \ArrayAccess, \Countable
+class Collection implements \ArrayAccess, \Countable, \Iterator
 {
 
     private $_data = [];
@@ -390,6 +390,18 @@ class Collection implements \ArrayAccess, \Countable
     {
         $this->_pointer--;
         return $this->current();
+    }
+
+    function rewind() {
+        $this->_pointer = 0;
+    }
+
+    function key() {
+        return $this->_pointer;
+    }
+
+    function valid() {
+        return $this->hasKey($this->_pointer);
     }
 
     /**

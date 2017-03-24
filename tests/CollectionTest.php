@@ -26,6 +26,14 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->collection instanceof \ArrayAccess);
     }
 
+    public function testIterator()
+    {
+        foreach ($this->collection as $key=>$value) {
+            $this->assertTrue(is_numeric($key));
+            $this->assertTrue(is_array($value));
+        }
+    }
+
     public function testArrayAccess()
     {
         $this->assertEquals($this->_2, $this->collection[2]);

@@ -105,7 +105,7 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
     public function testKeysLocked()
     {
-        $map = new Map(['foo6' => 'bar6'], true);
+        $map = new Map(['foo6' => 'bar6'], ['keys_locked' => true]);
         $success = false;
         try {
             $map->set('foo7', 'bar7');

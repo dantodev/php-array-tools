@@ -4,16 +4,18 @@ class Collection
 {
 
     private $_data = [];
+    private $_options = [];
     private $_pointer = -1;
 
     /**
      * Collection constructor.
      * @param array $data
-     * @param bool $construct_recursive
+     * @param array $options
      */
-    public function __construct(array $data = [], $construct_recursive = false)
+    public function __construct(array $data = [], array $options = [])
     {
-        if ($construct_recursive) {
+        $this->_options = $options;
+        if ($this->getOption('construct_recursive', false)) {
             foreach ($data as $index => $value) {
                 if (is_array($value)) {
                     if (array_keys($value) === range(0, count($value) - 1)) {
@@ -28,6 +30,27 @@ class Collection
             $this->_data = $data;
         }
         $this->_clearIndexes();
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption($key, $value)
+    {
+        $this->_options[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed|null $default
+     * @return mixed|null
+     */
+    public function getOption($key, $default = null)
+    {
+        return array_key_exists($key, $this->_options) ? $this->_options[$key] : $default;
     }
 
     /**

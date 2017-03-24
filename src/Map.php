@@ -6,7 +6,7 @@ class Map
      * @var array
      */
     private $_properties = [];
-    private $_keys_locked = false;
+    private $_options = [];
 
     /**
      * @param $key
@@ -46,19 +46,18 @@ class Map
     /**
      * Map constructor.
      * @param array $properties
-     * @param bool $keys_locked
-     * @param bool $construct_recursive
+     * @param array $options
      */
-    public function __construct(array $properties = [], $keys_locked = false, $construct_recursive = false)
+    public function __construct(array $properties = [], array $options = [])
     {
-        $this->_keys_locked = $keys_locked;
-        if ($construct_recursive) {
+        $this->_options = $options;
+        if ($this->getOption('construct_recursive', false)) {
             foreach ($properties as $key => $value) {
                 if (is_array($value)) {
                     if (array_keys($value) === range(0, count($value) - 1)) {
-                        $value = new Collection($value, false, true);
+                        $value = new Collection($value, $options);
                     } else {
-                        $value = new self($value, false, true);
+                        $value = new self($value, $options);
                     }
                 }
                 $this->_properties[$key] = $value;
@@ -66,6 +65,27 @@ class Map
         } else {
             $this->_properties = $properties;
         }
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption($key, $value)
+    {
+        $this->_options[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed|null $default
+     * @return mixed|null
+     */
+    public function getOption($key, $default = null)
+    {
+        return array_key_exists($key, $this->_options) ? $this->_options[$key] : $default;
     }
 
     /**
@@ -103,7 +123,7 @@ class Map
      */
     public function set($key, $value)
     {
-        if (!$this->_keys_locked || $this->has($key)) {
+        if (!$this->getOption('keys_locked', false) || $this->has($key)) {
             $this->_properties[(string)$key] = $value;
         } else {
             throw new \RuntimeException("Unknown map key '$key'.'");
@@ -118,7 +138,7 @@ class Map
     public function remove($key)
     {
         if ($this->has((string)$key)) {
-            if ($this->_keys_locked) {
+            if ($this->getOption('keys_locked')) {
                 $this->set($key, null);
             } else {
                 unset($this->_properties[(string)$key]);
@@ -209,7 +229,7 @@ class Map
      */
     public function clear()
     {
-        if ($this->_keys_locked) {
+        if ($this->getOption('keys_locked')) {
             $this->_properties = array_map(function () {
                 return null;
             }, $this->_properties);

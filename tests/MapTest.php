@@ -8,7 +8,7 @@ class MapTest extends \PHPUnit_Framework_TestCase
      */
     public $properties;
 
-    public function testIstance()
+    public function testInstance()
     {
         $this->assertTrue($this->properties instanceof Map);
         $this->assertTrue($this->properties instanceof \Countable);

@@ -19,7 +19,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->collection = new Collection([$this->_0, $this->_1, $this->_2, $this->_3]);
     }
 
-    public function testIstance()
+    public function testInstance()
     {
         $this->assertTrue($this->collection instanceof Collection);
         $this->assertTrue($this->collection instanceof \Countable);

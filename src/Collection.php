@@ -1,6 +1,6 @@
 <?php namespace Dtkahl\ArrayTools;
 
-class Collection
+class Collection implements \ArrayAccess, \Countable
 {
 
     private $_data = [];
@@ -180,6 +180,9 @@ class Collection
         if ($do_not_clear) {
             return $this;
         }
+        if ($this->_pointer >= $key) {
+            $this->_pointer--;
+        }
         return $this->_clearIndexes();
     }
 
@@ -263,7 +266,7 @@ class Collection
     public function put($key, $value)
     {
         $this->_data[(int)$key] = $value;
-        return $this;
+        return $this->_clearIndexes();
     }
 
     /**
@@ -444,6 +447,41 @@ class Collection
     public function getType($key)
     {
         return gettype($this->get($key));
+    }
+
+    /**
+     * @param string $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value) {
+        if (!is_null($offset) && is_numeric($offset)) {
+            $this->put($offset, $value);
+        } else {
+            $this->push($value);
+        }
+    }
+
+    /**
+     * @param string $offset
+     * @return bool
+     */
+    public function offsetExists($offset) {
+        return $this->hasKey($offset);
+    }
+
+    /**
+     * @param string $offset
+     */
+    public function offsetUnset($offset) {
+        $this->remove($offset);
+    }
+
+    /**
+     * @param string $offset
+     * @return null
+     */
+    public function offsetGet($offset) {
+        return $this->get($offset);
     }
 
 }

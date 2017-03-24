@@ -19,6 +19,22 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->collection = new Collection([$this->_0, $this->_1, $this->_2, $this->_3]);
     }
 
+    public function testIstance()
+    {
+        $this->assertTrue($this->collection instanceof Collection);
+        $this->assertTrue($this->collection instanceof \Countable);
+        $this->assertTrue($this->collection instanceof \ArrayAccess);
+    }
+
+    public function testArrayAccess()
+    {
+        $this->assertEquals($this->_2, $this->collection[2]);
+        $this->collection[] = 'bar3';
+        $this->assertTrue(isset($this->collection[4]));
+        unset($this->collection[2]);
+        $this->assertFalse(isset($this->collection[4]));
+    }
+
     public function testToArray()
     {
         $this->assertCount(4, $this->collection->toArray());

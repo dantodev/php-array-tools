@@ -8,6 +8,23 @@ class MapTest extends \PHPUnit_Framework_TestCase
      */
     public $properties;
 
+    public function testIstance()
+    {
+        $this->assertTrue($this->properties instanceof Map);
+        $this->assertTrue($this->properties instanceof \Countable);
+        $this->assertTrue($this->properties instanceof \ArrayAccess);
+    }
+
+    public function testArrayAccess()
+    {
+        $this->assertEquals('bar2', $this->properties['foo2']);
+        $this->properties['foo3'] = 'bar3';
+        $this->assertTrue(isset($this->properties['foo3']));
+        unset($this->properties['foo1']);
+        $this->assertFalse(isset($this->properties['foo1']));
+
+    }
+
     public function setUp()
     {
         $this->properties = new Map([

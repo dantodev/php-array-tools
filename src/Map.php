@@ -1,6 +1,6 @@
 <?php namespace Dtkahl\ArrayTools;
 
-class Map
+class Map implements \ArrayAccess, \Countable
 {
     /**
      * @var array
@@ -287,6 +287,39 @@ class Map
     public function getType($key)
     {
         return gettype($this->get($key));
+    }
+
+    /**
+     * @param string $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value) {
+        if (!is_null($offset)) {
+            $this->set($offset, $value);
+        }
+    }
+
+    /**
+     * @param string $offset
+     * @return bool
+     */
+    public function offsetExists($offset) {
+        return $this->has($offset);
+    }
+
+    /**
+     * @param string $offset
+     */
+    public function offsetUnset($offset) {
+        $this->remove($offset);
+    }
+
+    /**
+     * @param string $offset
+     * @return null
+     */
+    public function offsetGet($offset) {
+        return $this->get($offset);
     }
 
 }

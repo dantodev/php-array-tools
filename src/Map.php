@@ -271,6 +271,19 @@ class Map implements \ArrayAccess, \Countable, \Serializable
 
     /**
      * @param \Closure $call
+     * @return $this
+     */
+    public function filter(\Closure $call)
+    {
+        return $this->each(function ($key, $item) use ($call) {
+            if ($call($key, $item) !== true) {
+                $this->remove($key);
+            }
+        });
+    }
+
+    /**
+     * @param \Closure $call
      * @return Map
      */
     public function map(\Closure $call)

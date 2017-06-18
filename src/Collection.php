@@ -206,8 +206,8 @@ class Collection implements \ArrayAccess, \Countable, \Iterator, \Serializable
      */
     public function filter(\Closure $call)
     {
-        $this->each(function ($key, $item) use ($call) {
-            if ($call($key, $item) !== true) {
+        $this->each(function ($item, $key) use ($call) {
+            if ($call($item, $key) !== true) {
                 $this->remove($key, true);
             }
         });

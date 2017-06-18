@@ -165,6 +165,14 @@ class MapTest extends \PHPUnit_Framework_TestCase
         ], $arr);
     }
 
+    public function testFilter()
+    {
+        $this->properties->filter(function ($key) {
+            return $key == 'foo1';
+        });
+        $this->assertEquals(1, $this->properties->count());
+    }
+
 
     public function testMap()
     {

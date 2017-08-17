@@ -77,8 +77,9 @@ Returns serialized items (call `$item->toSerializedArray()` if item is object an
 #### `toJson()`
 Returns all items of the map as JSON string.
 
-#### `merge(array $data)`
+#### `merge(array $data, $prefer_old = false)`
 Merge given array (or Map instance) into map data.
+If `$prefer_old` is true, the data will be merged in the opposite direction.
 Returns map instance.
 
 #### `copy()`

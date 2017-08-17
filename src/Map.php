@@ -204,15 +204,20 @@ class Map implements \ArrayAccess, \Countable, \Serializable
 
     /**
      * @param $data
+     * @param $prefer_old
      * @return $this
      */
-    public function merge($data)
+    public function merge($data, $prefer_old = false)
     {
         if ($data instanceof self) {
-            $this->_properties = array_merge($this->_properties, $data->toArray());
+            $data = $data->toArray();
+        }
+        if ($prefer_old) {
+            $this->_properties = array_merge($data, $this->_properties);
         } else {
             $this->_properties = array_merge($this->_properties, $data);
         }
+
         return $this;
     }
 

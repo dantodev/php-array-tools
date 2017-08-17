@@ -1,19 +1,21 @@
 <?php namespace Dtkahl\ArrayTools;
 
-class Collection
+class Collection implements \ArrayAccess, \Countable, \Iterator, \Serializable
 {
 
     private $_data = [];
+    private $_options = [];
     private $_pointer = -1;
 
     /**
      * Collection constructor.
      * @param array $data
-     * @param bool $construct_recursive
+     * @param array $options
      */
-    public function __construct(array $data = [], $construct_recursive = false)
+    public function __construct(array $data = [], array $options = [])
     {
-        if ($construct_recursive) {
+        $this->_options = $options;
+        if ($this->getOption('recursive', false)) {
             foreach ($data as $index => $value) {
                 if (is_array($value)) {
                     if (array_keys($value) === range(0, count($value) - 1)) {
@@ -28,6 +30,27 @@ class Collection
             $this->_data = $data;
         }
         $this->_clearIndexes();
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption($key, $value)
+    {
+        $this->_options[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed|null $default
+     * @return mixed|null
+     */
+    public function getOption($key, $default = null)
+    {
+        return array_key_exists($key, $this->_options) ? $this->_options[$key] : $default;
     }
 
     /**
@@ -136,11 +159,12 @@ class Collection
 
     /**
      * @param int $key
+     * @param mixed|null $default
      * @return mixed
      */
-    public function get($key)
+    public function get($key, $default = null)
     {
-        return $this->hasKey((int)$key) ? $this->_data[(int)$key] : null;
+        return $this->hasKey((int)$key) ? $this->_data[(int)$key] : $default;
     }
 
     /**
@@ -155,6 +179,9 @@ class Collection
         }
         if ($do_not_clear) {
             return $this;
+        }
+        if ($this->_pointer >= $key) {
+            $this->_pointer--;
         }
         return $this->_clearIndexes();
     }
@@ -180,8 +207,7 @@ class Collection
     public function filter(\Closure $call)
     {
         $this->each(function ($item, $key) use ($call) {
-            $exit = $call($item, $key);
-            if ($exit !== true) {
+            if ($call($item, $key) !== true) {
                 $this->remove($key, true);
             }
         });
@@ -239,7 +265,7 @@ class Collection
     public function put($key, $value)
     {
         $this->_data[(int)$key] = $value;
-        return $this;
+        return $this->_clearIndexes();
     }
 
     /**
@@ -247,7 +273,11 @@ class Collection
      */
     public function shift()
     {
-        return array_shift($this->_data);
+        $return = array_shift($this->_data);
+        if ($this->_pointer > 0) {
+            $this->_pointer--;
+        }
+        return $return;
     }
 
     /**
@@ -340,7 +370,7 @@ class Collection
      */
     public function current()
     {
-        return $this->get($this->_pointer);
+        return $this->get($this->_pointer, false);
     }
 
     /**
@@ -359,6 +389,18 @@ class Collection
     {
         $this->_pointer--;
         return $this->current();
+    }
+
+    function rewind() {
+        $this->_pointer = 0;
+    }
+
+    function key() {
+        return $this->_pointer;
+    }
+
+    function valid() {
+        return $this->hasKey($this->_pointer);
     }
 
     /**
@@ -407,6 +449,63 @@ class Collection
     {
         $this->_data = array_unique($this->_data, SORT_REGULAR);
         return $this->_clearIndexes();
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getType($key)
+    {
+        return gettype($this->get($key));
+    }
+
+    /**
+     * @param string $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value) {
+        if (!is_null($offset) && is_numeric($offset)) {
+            $this->put($offset, $value);
+        } else {
+            $this->push($value);
+        }
+    }
+
+    /**
+     * @param string $offset
+     * @return bool
+     */
+    public function offsetExists($offset) {
+        return $this->hasKey($offset);
+    }
+
+    /**
+     * @param string $offset
+     */
+    public function offsetUnset($offset) {
+        $this->remove($offset);
+    }
+
+    /**
+     * @param string $offset
+     * @return null
+     */
+    public function offsetGet($offset) {
+        return $this->get($offset);
+    }
+
+    public function serialize()
+    {
+        return serialize($this->_data);
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        $this->_data = unserialize($serialized);
     }
 
 }

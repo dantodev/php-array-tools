@@ -19,6 +19,39 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->collection = new Collection([$this->_0, $this->_1, $this->_2, $this->_3]);
     }
 
+    public function testInstance()
+    {
+        $this->assertTrue($this->collection instanceof Collection);
+        $this->assertTrue($this->collection instanceof \Countable);
+        $this->assertTrue($this->collection instanceof \ArrayAccess);
+        $this->assertTrue($this->collection instanceof \Serializable);
+    }
+
+    public function testIterator()
+    {
+        foreach ($this->collection as $key=>$value) {
+            $this->assertTrue(is_numeric($key));
+            $this->assertTrue(is_array($value));
+        }
+    }
+
+    public function testArrayAccess()
+    {
+        $this->assertEquals($this->_2, $this->collection[2]);
+        $this->collection[] = 'bar3';
+        $this->assertTrue(isset($this->collection[4]));
+        unset($this->collection[2]);
+        $this->assertFalse(isset($this->collection[4]));
+    }
+
+    public function testSerializable()
+    {
+        $serialized = serialize($this->collection);
+        $collection = unserialize($serialized);
+        $this->assertTrue($collection instanceof Collection);
+        $this->assertEquals('kara', $collection[1]['first_name']);
+    }
+
     public function testToArray()
     {
         $this->assertCount(4, $this->collection->toArray());
@@ -192,12 +225,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->_1, $this->collection->next());
         $this->assertEquals($this->_2, $this->collection->next());
         $this->assertEquals($this->_3, $this->collection->next());
-        $this->assertEquals(null, $this->collection->next());
+        $this->assertFalse($this->collection->next());
         $this->assertEquals($this->_3, $this->collection->previous());
         $this->assertEquals($this->_2, $this->collection->previous());
         $this->assertEquals($this->_1, $this->collection->previous());
         $this->assertEquals($this->_0, $this->collection->previous());
-        $this->assertEquals(null, $this->collection->previous());
+        $this->assertFalse($this->collection->previous());
         $this->collection->setPointer(2);
         $this->assertEquals($this->_2, $this->collection->current());
 
@@ -217,6 +250,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testUnique()
     {
         $this->assertEquals(["a", "c"], (new Collection(["a", "c", "a"]))->unique()->toArray());
+    }
+
+    public function testGetType()
+    {
+        $this->assertEquals('array', $this->collection->getType('1'));
     }
 
 }

@@ -8,6 +8,31 @@ class MapTest extends \PHPUnit_Framework_TestCase
      */
     public $properties;
 
+    public function testInstance()
+    {
+        $this->assertTrue($this->properties instanceof Map);
+        $this->assertTrue($this->properties instanceof \Countable);
+        $this->assertTrue($this->properties instanceof \ArrayAccess);
+        $this->assertTrue($this->properties instanceof \Serializable);
+    }
+
+    public function testArrayAccess()
+    {
+        $this->assertEquals('bar2', $this->properties['foo2']);
+        $this->properties['foo3'] = 'bar3';
+        $this->assertTrue(isset($this->properties['foo3']));
+        unset($this->properties['foo1']);
+        $this->assertFalse(isset($this->properties['foo1']));
+    }
+
+    public function testSerializable()
+    {
+        $serialized = serialize($this->properties);
+        $map = unserialize($serialized);
+        $this->assertTrue($map instanceof Map);
+        $this->assertEquals('bar2', $map['foo2']);
+    }
+
     public function setUp()
     {
         $this->properties = new Map([
@@ -105,7 +130,7 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
     public function testKeysLocked()
     {
-        $map = new Map(['foo6' => 'bar6'], true);
+        $map = new Map(['foo6' => 'bar6'], ['keys_locked' => true]);
         $success = false;
         try {
             $map->set('foo7', 'bar7');
@@ -140,6 +165,14 @@ class MapTest extends \PHPUnit_Framework_TestCase
         ], $arr);
     }
 
+    public function testFilter()
+    {
+        $this->properties->filter(function ($key) {
+            return $key == 'foo1';
+        });
+        $this->assertEquals(1, $this->properties->count());
+    }
+
 
     public function testMap()
     {
@@ -150,6 +183,21 @@ class MapTest extends \PHPUnit_Framework_TestCase
             'foo1' => 'mapped_bar1',
             'foo2' => 'mapped_bar2'
         ], $this->properties->toArray());
+    }
+
+    public function testRecursiveOption()
+    {
+        $map = new Map([
+            'persons' => ['Luke', 'Lea'],
+            'other' => ['foo' => 'bar', 'foo2' => 'bar2']
+        ], ['recursive' => true]);
+        $this->assertTrue($map->get('persons') instanceof Collection);
+        $this->assertTrue($map->get('other') instanceof Map);
+    }
+
+    public function testGetType()
+    {
+        $this->assertEquals('string', $this->properties->getType('foo1'));
     }
 
 }

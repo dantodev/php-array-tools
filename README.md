@@ -22,7 +22,7 @@ composer require dtkahl/php-array-tools
 
 ## Map Class
 
-This class provides a wrapper class for __indexed__ arrays.
+This class provides a wrapper class for __indexed__ arrays and implements `\ArrayAccess`, `\Countable` and `\Serializable` Interfaces.
 
 
 ### Usage
@@ -43,6 +43,10 @@ $map = new Map([
 ]);
 ```
 
+**available options:**
+
+* `recursive` -> create instance recursive (automatically create Map or Collection instance from array values)
+* `key_locked` -> only allow keys which are already defined in Map.
 
 ### Methods
 
@@ -73,8 +77,9 @@ Returns serialized items (call `$item->toSerializedArray()` if item is object an
 #### `toJson()`
 Returns all items of the map as JSON string.
 
-#### `merge(array $data)`
+#### `merge(array $data, $prefer_old = false)`
 Merge given array (or Map instance) into map data.
+If `$prefer_old` is true, the data will be merged in the opposite direction.
 Returns map instance.
 
 #### `copy()`
@@ -109,7 +114,11 @@ Returns collection instance.
 
 ## Collection Class
 
-This class provides a wrapper class for __indexed__ arrays.
+This class provides a wrapper class for __indexed__ arrays implements `\ArrayAccess`, `\Countable`, `\Iterator` and `\Serializable` Interfaces.
+
+**available options:**
+
+* `recursive` -> create instance recursive (automatically create Map or Collection instance from array values)
 
 
 ### Usage

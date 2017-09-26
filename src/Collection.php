@@ -69,7 +69,7 @@ class Collection implements \ArrayAccess, \Countable, \Iterator, \Serializable
         return $this->copy()->map(function ($item) {
             return (is_object($item) && method_exists($item, 'toSerializedArray')) ?
                 $item->toSerializedArray() :
-                json_decode(json_encode($item), true); // Do anyone know a better way? :)
+                $item; // no way to safely serialize the item
         })->toArray();
     }
 

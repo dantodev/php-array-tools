@@ -181,7 +181,7 @@ class Map implements \ArrayAccess, \Countable, \Serializable
         $array = [];
         foreach ($this->toArray() as $key => $item) {
             $array[$key] = (is_object($item) && method_exists($item, 'toSerializedArray')) ?
-                $item->toSerializedArray() : json_decode(json_encode($item), true);  // Do anyone know a better way? :)
+                $item->toSerializedArray() : $item;  // no way to safely serialize the item
         }
         return $array;
     }
